@@ -1,26 +1,35 @@
 package WWW::DanDomain;
 
-# $Id: DanDomain.pm 6178 2009-06-15 09:10:49Z jonasbn $
+# $Id: DanDomain.pm 6368 2009-08-20 20:09:31Z jonasbn $
 
 use warnings;
 use strict;
 use WWW::Mechanize;
+use WWW::Mechanize::Cached;
 use Carp qw(croak);
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 sub new {
     my ( $class, $param ) = @_;
+
+    my $mech;
+    my $agent = __PACKAGE__ . "-$VERSION";
+    if ( $param->{mech} ) {
+        $mech = $param->{mech};
+    } elsif ( $param->{cache} ) {
+        $mech = WWW::Mechanize::Cached->new( agent => $agent );
+    } else {
+        $mech = WWW::Mechanize->new( agent => $agent );
+    }
 
     my $self = bless {
         base_url => 'http://www.billigespil.dk/admin',
         username => $param->{username},
         password => $param->{password},
         url      => $param->{url},
-        mech     => $param->{mech}
-        ? $param->{mech}
-        : WWW::Mechanize->new( agent => __PACKAGE__ . "-$VERSION" ),
-        verbose => $param->{verbose} || 0,
+        verbose  => $param->{verbose} || 0,
+        mech     => $mech,
     }, $class;
 
     return $self;
@@ -92,6 +101,14 @@ This can be used for automating tasks of processing data exports etc.
         password => 'topsecret',
         url      => 'http://www.billigespil.dk/admin/edbpriser-export.asp',
         verbose  => 1,
+    });
+
+    #With caching
+    my $wd = WWW::DanDomain->new({
+        username => 'topshop',
+        password => 'topsecret',
+        url      => 'http://www.billigespil.dk/admin/edbpriser-export.asp',
+        cache    => 1,
     });
 
 
@@ -170,11 +187,20 @@ contain keys according to the following conventions:
 
 =item * url, the mandatory URL to retrieve data from (L</retrieve>)
 
-=item * mech, a L<WWW::Mechanize> object if you have a pre instantiated object,
-The parameter is optional
+=item * mech, a L<WWW::Mechanize> object if you have a pre instantiated object
+or some other object implementing the the same API as L<WWW::Mechanize>.
+
+The parameter is optional. 
+
+See also cache parameter below for an example.
 
 =item * verbose, a flag for indicating verbosity, default is 0 (disabled), the
 parameter is optional
+
+=item * cache, usage of a cache meaning that we internally use
+L<WWW::Mechanize::Cached> instead of L<WWW::Mechanize>.
+
+The parameter is optional
 
 =back
 
@@ -256,7 +282,23 @@ with username and password is required.
 The tests are based on L<Test::MockObject::Extends> and example data are
 mocked dummy data. Please see the TODO section.
 
+The test suite uses the following environment variables as flags:
+
+=over
+
+=item TEST_AUTHOR, to test prerequisites, using L<Test::Prereq>
+
+=item TEST_CRITIC, to do a static analysis of the code, using L<Perl::Critic>,
+see also QUALITY AND CODING STANDARD
+
+=back
+
 =head2 TEST COVERAGE
+
+The following data are based on an analysis created using L<Devel::Cover> and
+the distributions own test suite, instantiated the following way.
+
+    % ./Build testcover --verbose
 
 ---------------------------- ------ ------ ------ ------ ------ ------ ------
 File                           stmt   bran   cond    sub    pod   time  total
@@ -268,6 +310,17 @@ Total                         100.0  100.0  100.0  100.0  100.0  100.0  100.0
 =head1 QUALITY AND CODING STANDARD
 
 The code passes L<Perl::Critic> tests a severity: 1 (brutal)
+
+The following policies have been disabled:
+
+=over
+
+=item L<Perl::Critic::Policy::InputOutput::RequireBracedFileHandleWithPrint>
+
+=back
+
+L<Perl::Critic> resource file, can be located in the t/ directory of the
+distribution F<t/perlcriticrc>
 
 L<Perl::Tidy> resource file, can be obtained from the original author
 
@@ -291,7 +344,7 @@ Please report any bugs or feature requests via:
 
 =over
 
-=item * Repository: L<http://github.com/jonasbn/www-dandomain/tree/master>
+=item * Subversion repository: L<http://logicLAB.jira.com/svn/DAND>
 
 =back
 
@@ -372,8 +425,12 @@ into a package (this package) letting it loose as open source.
 
 =over
 
-=item * Andy Lester (petdance) the author L<WWW::Mechanize>, this module makes
-easy things easy and hard things possible.
+=item * Andy Lester (petdance) the author of L<WWW::Mechanize> and
+L<WWW::Mechanize:Cached>, this module makes easy things easy and hard things
+possible.
+
+=item * Steen Schnack, who understand the power and flexibility of computer
+programming and custom solutions and who gave me the assignment.
 
 =back
 

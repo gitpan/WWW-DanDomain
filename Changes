@@ -1,8 +1,15 @@
 Revision history for WWW-DanDomain
 
-$Id: Changes 1921 2009-03-30 10:23:20Z jonasbn $
+$Id: Changes 6332 2009-08-16 12:06:44Z jonasbn $
 
-0.01    Not released
+0.02    Minor release, 16.09.2009, update not required
 
-        First version, to be released on an unsuspecting world.
+- Fixed dependencies, WWW::Mechanize was not listed, so smoke tests were
+  failing
+        
+- First shot at caching using WWW::Mechanize::Cached
 
+
+0.01    Initial release, 15.06.2009
+
+- First version, to be released on an unsuspecting world.
