@@ -13,10 +13,9 @@ my $build = Module::Build->new(
     license              => 'perl',
     recursive_test_files => 1,
     create_readme        => 1,
-    configure_requires   => { 'Module::Build' => '0', },
+    configure_requires   => {},
     build_requires       => {
-        'Test::More'                => '0',
-        'Module::Build'             => '0',
+        'Test::More'                => '0', 
         'File::Slurp'               => '0',
         'Test::Exception'           => '0',
         'Test::MockObject::Extends' => '0',
@@ -25,6 +24,7 @@ my $build = Module::Build->new(
         'Env'                       => '0',
     },
     requires => {
+        'Module::Build'             => '0.30',
         'Data::Dumper'           => '0',    #Debugging
         'WWW::Mechanize'         => '0',
         'WWW::Mechanize::Cached' => '0',

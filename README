@@ -3,7 +3,7 @@ NAME
     interface
 
 VERSION
-    This documentation describes version 0.01
+    This documentation describes version 0.03
 
 SYNOPSIS
     The module lets the user interact with DanDomains administrative web
@@ -13,10 +13,17 @@ SYNOPSIS
         use WWW::DanDomain;
 
         #All mandatory parameters
+        #Please note DanDomain can be configured to use authorization on IP
+        #meaning authentication is unnessesary
+        my $wd = WWW::DanDomain->new({
+            url => 'http://www.billigespil.dk/admin/edbpriser-export.asp',
+        });
+
+        #With optional authentication credentials
         my $wd = WWW::DanDomain->new({
             username => 'topshop',
             password => 'topsecret',
-            url      => 'http://www.billigespil.dk/admin/edbpriser-export.asp',
+            url => 'http://www.billigespil.dk/admin/edbpriser-export.asp',
         });
 
         #with verbosity enabled
@@ -73,8 +80,8 @@ SYNOPSIS
         print $$content;
 
 DESCRIPTION
-    This module is a simple wrapper around WWW::Mechnize it assists the user
-    in getting going with automating tasks related to the DanDomain
+    This module is a simple wrapper around WWW::Mechanize it assists the
+    user in getting going with automating tasks related to the DanDomain
     administrative web interface.
 
     Such as:
@@ -82,17 +89,17 @@ DESCRIPTION
     * manipulating data exports (removing, adjusting, calculating, adding
     columns)
     * filling in missing data (combining data)
-    * converting formats (from CSV to XML)
+    * converting formats (from CSV to XML, JSON, CSV, whatever)
+
 METHODS
   new
-
     This is the constructor.
 
     The constructor takes a hash reference as input. The hash reference
     should contain keys according to the following conventions:
 
-    * username, the mandatory username to access DanDomain
-    * password, the mandatory password to access DanDomain
+    * username, optional username credential to access DanDomain
+    * password, optional password credential to access DanDomain
     * url, the mandatory URL to retrieve data from (retrieve)
     * mech, a WWW::Mechanize object if you have a pre instantiated object or
     some other object implementing the the same API as WWW::Mechanize.
@@ -107,19 +114,18 @@ METHODS
         The parameter is optional
 
   retrieve
-
     Parameters:
 
     * a hash reference, the reference can be populated with statistic
     information based on the lineprocessing (processor) initiated from
     retrieve.
+
     The method returns a scalar reference to a string containing the content
     retrieved from the URL provided to the contructor (new). If the
     processor method is overwritten you can manipulate the content prior to
     being returned.
 
   processor
-
     This is a stub and it might go away in the future. It does takes the
     content retrieved (see: retrieve) from the URL parameter provided to the
     constructor (see: new).
@@ -127,10 +133,16 @@ METHODS
     Parameters:
 
     * a scalar reference to a string to be processed line by line
+
     The stub does however not do anything, but it returns the scalar
     reference *untouched*.
 
 DIAGNOSTICS
+    * Unable to authenticate, username and password not valid credentials
+    * Both username and password is required for authentication
+        If you want to use authentication you have to provide both username
+        and password.
+
     * Unable to retrieve base URL: $@
         The base URL provided to retrieve gives an error.
 
@@ -154,6 +166,7 @@ CONFIGURATION AND ENVIRONMENT
 DEPENDENCIES
     * WWW::Mechanize
     * Carp
+
 TEST AND QUALITY
     The tests are based on Test::MockObject::Extends and example data are
     mocked dummy data. Please see the TODO section.
@@ -163,8 +176,8 @@ TEST AND QUALITY
     TEST_AUTHOR, to test prerequisites, using Test::Prereq
     TEST_CRITIC, to do a static analysis of the code, using Perl::Critic,
     see also QUALITY AND CODING STANDARD
-  TEST COVERAGE
 
+  TEST COVERAGE
     The following data are based on an analysis created using Devel::Cover
     and the distributions own test suite, instantiated the following way.
 
@@ -178,12 +191,15 @@ TEST AND QUALITY
     ---------------------------- ------ ------ ------ ------ ------ ------
     ------
 
+    Please note the report is based on version 0.03 of WWW::DanDomain
+
 QUALITY AND CODING STANDARD
     The code passes Perl::Critic tests a severity: 1 (brutal)
 
     The following policies have been disabled:
 
     Perl::Critic::Policy::InputOutput::RequireBracedFileHandleWithPrint
+
     Perl::Critic resource file, can be located in the t/ directory of the
     distribution t/perlcriticrc
 
@@ -197,16 +213,20 @@ BUG REPORTING
 
     * email: `bug-www-dandomain at rt.cpan.org'
     * HTTP: http://rt.cpan.org/NoAuth/ReportBug.html?Queue=WWW-DanDomain
+
 DEVELOPMENT
     * Subversion repository: http://logicLAB.jira.com/svn/DAND
+
 TODO
     * Most of the work is done in the classes inheriting from this class,
     there could however be work to do in the maintenance area, making this
     class more informative if failing
     * I would like to add some integration test scripts so I can see that
     the package works with real data apart from the mock.
+
 SEE ALSO
     * http://www.dandomain.dk
+
 SUPPORT
     You can find documentation for this module with the perldoc command.
 
@@ -231,6 +251,7 @@ SUPPORT
 
 AUTHOR
     * jonasbn, `<jonasbn at cpan.org>'
+
 MOTIVATION
     This module grew out of a small script using WWW::Mechanize to fetch
     some data from a website and changing it to satisfy the client utilizing
@@ -251,8 +272,9 @@ ACKNOWLEDGEMENTS
     things possible.
     * Steen Schnack, who understand the power and flexibility of computer
     programming and custom solutions and who gave me the assignment.
+
 LICENSE AND COPYRIGHT
-    Copyright 2009 jonasbn, all rights reserved.
+    Copyright 2009-2010 jonasbn, all rights reserved.
 
     This program is free software; you can redistribute it and/or modify it
     under the same terms as Perl itself.

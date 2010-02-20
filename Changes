@@ -1,6 +1,13 @@
 Revision history for WWW-DanDomain
 
-$Id: Changes 6332 2009-08-16 12:06:44Z jonasbn $
+$Id: Changes 6984 2010-02-20 20:18:14Z jonasbn $
+
+0.03    Maintenance release 20.02.2010, updated not required
+
+- Implemented handling of DanDomain access scenario where authentication credentials are not needed, since authorization is based on IP validation (feature with DanDomain)
+
+- Improved error handling
+
 
 0.02    Minor release, 16.09.2009, update not required
 

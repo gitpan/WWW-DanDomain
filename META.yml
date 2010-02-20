@@ -1,34 +1,36 @@
 ---
-name: WWW-DanDomain
-version: 0.02
+abstract: WWW::DanDomain
 author:
   - 'Jonas B. Nielsen, <jonasbn@logicLAB.dk>'
-abstract: WWW::DanDomain
-license: perl
-resources:
-  bugtracker: http://rt.cpan.org/NoAuth/Bugs.html?Dist=WWW-DanDomain
-  homepage: http://logicLAB.jira.com/browse/DAND
-  license: http://dev.perl.org/licenses/
-  repository: http://logicLAB.jira.com/svn/DAND
-requires:
-  Carp: 0
-  Data::Dumper: 0
-  WWW::Mechanize: 0
-  WWW::Mechanize::Cached: 0
 build_requires:
   Env: 0
   File::Slurp: 0
-  Module::Build: 0
   Test::Exception: 0
   Test::MockObject::Extends: 0
   Test::More: 0
   Test::Perl::Critic: 0
   Test::Prereq::Build: 0
+configure_requires:
+  Module::Build: 0.36
+generated_by: 'Module::Build version 0.3603'
+license: perl
+meta-spec:
+  url: http://module-build.sourceforge.net/META-spec-v1.4.html
+  version: 1.4
+name: WWW-DanDomain
 provides:
   WWW::DanDomain:
     file: lib/WWW/DanDomain.pm
-    version: 0.02
-generated_by: Module::Build version 0.2806
-meta-spec:
-  url: http://module-build.sourceforge.net/META-spec-v1.2.html
-  version: 1.2
+    version: 0.03
+requires:
+  Carp: 0
+  Data::Dumper: 0
+  Module::Build: 0.30
+  WWW::Mechanize: 0
+  WWW::Mechanize::Cached: 0
+resources:
+  bugtracker: http://rt.cpan.org/NoAuth/Bugs.html?Dist=WWW-DanDomain
+  homepage: http://logicLAB.jira.com/browse/DAND
+  license: http://dev.perl.org/licenses/
+  repository: http://logicLAB.jira.com/svn/DAND
+version: 0.03
