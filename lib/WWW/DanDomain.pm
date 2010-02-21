@@ -1,6 +1,6 @@
 package WWW::DanDomain;
 
-# $Id: DanDomain.pm 6983 2010-02-20 20:14:51Z jonasbn $
+# $Id: DanDomain.pm 6990 2010-02-21 14:03:57Z jonasbn $
 
 use warnings;
 use strict;
@@ -8,7 +8,7 @@ use WWW::Mechanize;
 use WWW::Mechanize::Cached;
 use Carp qw(croak);
 
-our $VERSION = '0.03';
+our $VERSION = '0.04';
 
 sub new {
     my ( $class, $param ) = @_;
@@ -454,6 +454,9 @@ possible.
 
 =item * Steen Schnack, who understand the power and flexibility of computer
 programming and custom solutions and who gave me the assignment.
+
+=item * Slaven Rezic, for his CPAN testers work and assistance in pointing out
+an issue with release 0.03
 
 =back
 

@@ -21,7 +21,7 @@ name: WWW-DanDomain
 provides:
   WWW::DanDomain:
     file: lib/WWW/DanDomain.pm
-    version: 0.03
+    version: 0.04
 requires:
   Carp: 0
   Data::Dumper: 0
@@ -33,4 +33,4 @@ resources:
   homepage: http://logicLAB.jira.com/browse/DAND
   license: http://dev.perl.org/licenses/
   repository: http://logicLAB.jira.com/svn/DAND
-version: 0.03
+version: 0.04

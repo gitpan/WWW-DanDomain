@@ -272,6 +272,8 @@ ACKNOWLEDGEMENTS
     things possible.
     * Steen Schnack, who understand the power and flexibility of computer
     programming and custom solutions and who gave me the assignment.
+    * Slaven Rezic, for his CPAN testers work and assistance in pointing out
+    an issue with release 0.03
 
 LICENSE AND COPYRIGHT
     Copyright 2009-2010 jonasbn, all rights reserved.

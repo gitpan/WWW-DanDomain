@@ -14,6 +14,7 @@ my $build = Module::Build->new(
     recursive_test_files => 1,
     create_readme        => 1,
     configure_requires   => {},
+    create_makefile_pl   => 'traditional',
     build_requires       => {
         'Test::More'                => '0', 
         'File::Slurp'               => '0',
