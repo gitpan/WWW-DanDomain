@@ -21,3 +21,7 @@ functions = :builtins
 exclude_functions = print
 
 [-InputOutput::RequireBracedFileHandleWithPrint]
+
+[-Documentation::RequirePodLinksIncludeText]
+[Variables::ProhibitPunctuationVars]
+allow = $@ $!

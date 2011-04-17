@@ -1,6 +1,14 @@
-Revision history for WWW-DanDomain
+Change history for WWW::DanDomain
 
-$Id: Changes 6990 2010-02-21 14:03:57Z jonasbn $
+$Id: Changes 7603 2011-04-17 20:51:35Z jonasbn $
+
+Project change log:
+http://logicLAB.jira.com/browse/DAND#selectedTab=com.atlassian.jira.plugin.system.project%3Achangelog-panel
+
+0.05    Feature release 17.04.2011, updated not required
+
+- Introducing new parameter to constructor, providing more flexibility in interacting with the class http://logicLAB.jira.com/browse/DAND-8 [DAND-8]
+
 
 0.04    Bug fix release 21.02.2010, updated not required
 

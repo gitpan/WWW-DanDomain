@@ -3,7 +3,7 @@ NAME
     interface
 
 VERSION
-    This documentation describes version 0.03
+    This documentation describes version 0.05
 
 SYNOPSIS
     The module lets the user interact with DanDomains administrative web
@@ -79,6 +79,33 @@ SYNOPSIS
     
         print $$content;
 
+        #Using a processor implemented as a code reference
+        $wd = WWW::DanDomain->new({
+            username  => 'topshop',
+            password  => 'topsecret',
+            url       => 'http://www.billigespil.dk/admin/edbpriser-export.asp',
+            processor => sub {                
+                ${$_[0]} =~ s/test/fest/;        
+                return $_[0];
+            },
+        });    
+
+        #Implementing a processor class
+        my $processor = MY::Processor->new();
+    
+        UNIVERSAL::can($processor, 'process');
+    
+        $wd = WWW::DanDomain->new({
+            username  => 'topshop',
+            password  => 'topsecret',
+            url       => 'http://www.billigespil.dk/admin/edbpriser-export.asp',
+            processor => $processor,
+        });
+    
+        my $content = $wd->retrieve();
+    
+        print ${$content};
+
 DESCRIPTION
     This module is a simple wrapper around WWW::Mechanize it assists the
     user in getting going with automating tasks related to the DanDomain
@@ -113,6 +140,20 @@ METHODS
     WWW::Mechanize::Cached instead of WWW::Mechanize.
         The parameter is optional
 
+    * processor
+        This parameter can be used of you do not want to implement a
+        subclass of WWW::DanDomain.
+
+        The processor parameter can either be:
+
+        * an object implementing a proces method, with the following
+        profile:
+                proces(\$content);
+
+        * a code reference with the same profile, adhering to the following
+        example:
+                sub { return ${$_[0]} };
+
   retrieve
     Parameters:
 
@@ -125,10 +166,10 @@ METHODS
     processor method is overwritten you can manipulate the content prior to
     being returned.
 
-  processor
-    This is a stub and it might go away in the future. It does takes the
-    content retrieved (see: retrieve) from the URL parameter provided to the
-    constructor (see: new).
+  process
+    Takes the content retrieved (see: retrieve) from the URL parameter
+    provided to the constructor (see: new). You can overwrite the behaviour
+    via the constructor (see: new).
 
     Parameters:
 
@@ -136,6 +177,9 @@ METHODS
 
     The stub does however not do anything, but it returns the scalar
     reference *untouched*.
+
+  processor
+    This is a wrapper for process, provided for backwards compatibility.
 
 DIAGNOSTICS
     * Unable to authenticate, username and password not valid credentials

@@ -11,8 +11,9 @@ build_requires:
   Test::Perl::Critic: 0
   Test::Prereq::Build: 0
 configure_requires:
-  Module::Build: 0.36
-generated_by: 'Module::Build version 0.3603'
+  Module::Build: 0.38
+dynamic_config: 1
+generated_by: 'Module::Build version 0.38, CPAN::Meta::Converter version 2.110930'
 license: perl
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
@@ -21,7 +22,7 @@ name: WWW-DanDomain
 provides:
   WWW::DanDomain:
     file: lib/WWW/DanDomain.pm
-    version: 0.04
+    version: 0.05
 requires:
   Carp: 0
   Data::Dumper: 0
@@ -33,4 +34,4 @@ resources:
   homepage: http://logicLAB.jira.com/browse/DAND
   license: http://dev.perl.org/licenses/
   repository: http://logicLAB.jira.com/svn/DAND
-version: 0.04
+version: 0.05

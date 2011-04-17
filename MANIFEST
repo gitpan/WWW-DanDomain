@@ -3,17 +3,17 @@ Changes
 lib/WWW/DanDomain.pm
 Makefile.PL
 MANIFEST			This list of files
+META.json
 META.yml
 README
 t/00-load.t
 t/04_critic.t
-t/boilerplate.t
 t/new.t
 t/perlcriticrc
 t/pod-coverage.t
 t/pod.t
 t/prerequisites.t
+t/process.t
 t/processor.t
 t/retrieve.t
 t/testdata
-WWW-DanDomain.kpf
