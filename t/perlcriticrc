@@ -20,8 +20,15 @@ allow_leading_tabs = 0
 functions = :builtins
 exclude_functions = print
 
+# TODO
+# Perl::Critic policies, which needs to be addressed in the future
+
 [-InputOutput::RequireBracedFileHandleWithPrint]
 
 [-Documentation::RequirePodLinksIncludeText]
 [Variables::ProhibitPunctuationVars]
 allow = $@ $!
+
+[-RegularExpressions::RequireExtendedFormatting]
+
+[-InputOutput::ProhibitJoinedReadline] 

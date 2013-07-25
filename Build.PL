@@ -30,6 +30,8 @@ my $build = Module::Build->new(
         'WWW::Mechanize'         => '0',
         'WWW::Mechanize::Cached' => '0',
         'Carp'                   => '0',
+        'Try::Tiny'              => '0',
+        'UNIVERSAL::can'         => '0',
     },
     meta_merge => {
         resources => {

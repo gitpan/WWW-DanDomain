@@ -4,7 +4,7 @@
       "Jonas B. Nielsen, <jonasbn@logicLAB.dk>"
    ],
    "dynamic_config" : 1,
-   "generated_by" : "Module::Build version 0.38, CPAN::Meta::Converter version 2.110930",
+   "generated_by" : "Module::Build version 0.4005, CPAN::Meta::Converter version 2.131560",
    "license" : [
       "perl_5"
    ],
@@ -16,34 +16,36 @@
    "prereqs" : {
       "build" : {
          "requires" : {
-            "Env" : 0,
-            "File::Slurp" : 0,
-            "Test::Exception" : 0,
-            "Test::MockObject::Extends" : 0,
-            "Test::More" : 0,
-            "Test::Perl::Critic" : 0,
-            "Test::Prereq::Build" : 0
+            "Env" : "0",
+            "File::Slurp" : "0",
+            "Test::Exception" : "0",
+            "Test::MockObject::Extends" : "0",
+            "Test::More" : "0",
+            "Test::Perl::Critic" : "0",
+            "Test::Prereq::Build" : "0"
          }
       },
       "configure" : {
          "requires" : {
-            "Module::Build" : "0.38"
+            "Module::Build" : "0.40"
          }
       },
       "runtime" : {
          "requires" : {
-            "Carp" : 0,
-            "Data::Dumper" : 0,
+            "Carp" : "0",
+            "Data::Dumper" : "0",
             "Module::Build" : "0.30",
-            "WWW::Mechanize" : 0,
-            "WWW::Mechanize::Cached" : 0
+            "Try::Tiny" : "0",
+            "UNIVERSAL::can" : "0",
+            "WWW::Mechanize" : "0",
+            "WWW::Mechanize::Cached" : "0"
          }
       }
    },
    "provides" : {
       "WWW::DanDomain" : {
          "file" : "lib/WWW/DanDomain.pm",
-         "version" : "0.05"
+         "version" : "0.06"
       }
    },
    "release_status" : "stable",
@@ -59,5 +61,5 @@
          "url" : "http://logicLAB.jira.com/svn/DAND"
       }
    },
-   "version" : "0.05"
+   "version" : "0.06"
 }

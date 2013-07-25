@@ -1,14 +1,16 @@
 package WWW::DanDomain;
 
-# $Id: DanDomain.pm 7603 2011-04-17 20:51:35Z jonasbn $
+# $Id: DanDomain.pm 8117 2013-07-25 13:39:29Z jonasbn $
 
 use warnings;
 use strict;
 use WWW::Mechanize;
 use WWW::Mechanize::Cached;
 use Carp qw(croak);
+use Try::Tiny;
+use UNIVERSAL::can;
 
-our $VERSION = '0.05';
+our $VERSION = '0.06';
 
 sub new {
     my ( $class, $param ) = @_;
@@ -68,7 +70,13 @@ sub retrieve {
 
     if ( ref $self->{processor} eq 'CODE' ) {
         return &{ $self->{processor} }( \$content, $stat );
-    } elsif ( ref $self->{processor} and UNIVERSAL::can($self->{processor}, 'process' )) {
+    } elsif ( ref $self->{processor} ) {
+        try {
+            $self->{processor}->can('process');
+        }
+        catch {
+            croak q{Your processor does not implement 'process' method};
+        };
         return $self->{processor}->process( \$content, $stat );
     } else {
         return $self->process( \$content, $stat );
@@ -185,10 +193,10 @@ This can be used for automating tasks of processing data exports etc.
 
     #Using a processor implemented as a code reference
     $wd = WWW::DanDomain->new({
-    	username  => 'topshop',
-    	password  => 'topsecret',
-    	url       => 'http://www.billigespil.dk/admin/edbpriser-export.asp',
-    	processor => sub {                
+        username  => 'topshop',
+        password  => 'topsecret',
+        url       => 'http://www.billigespil.dk/admin/edbpriser-export.asp',
+        processor => sub {                
             ${$_[0]} =~ s/test/fest/;        
             return $_[0];
         },
@@ -201,10 +209,10 @@ This can be used for automating tasks of processing data exports etc.
     UNIVERSAL::can($processor, 'process');
     
     $wd = WWW::DanDomain->new({
-    	username  => 'topshop',
-    	password  => 'topsecret',
-    	url       => 'http://www.billigespil.dk/admin/edbpriser-export.asp',
-    	processor => $processor,
+        username  => 'topshop',
+        password  => 'topsecret',
+        url       => 'http://www.billigespil.dk/admin/edbpriser-export.asp',
+        processor => $processor,
     });
     
     my $content = $wd->retrieve();
@@ -390,12 +398,12 @@ the distributions own test suite, instantiated the following way.
 
     % ./Build testcover --verbose
 
----------------------------- ------ ------ ------ ------ ------ ------ ------
-File                           stmt   bran   cond    sub    pod   time  total
----------------------------- ------ ------ ------ ------ ------ ------ ------
-blib/lib/WWW/DanDomain.pm     100.0  100.0  100.0  100.0  100.0  100.0  100.0
-Total                         100.0  100.0  100.0  100.0  100.0  100.0  100.0
----------------------------- ------ ------ ------ ------ ------ ------ ------
+    ---------------------------- ------ ------ ------ ------ ------ ------ ------
+    File                           stmt   bran   cond    sub    pod   time  total
+    ---------------------------- ------ ------ ------ ------ ------ ------ ------
+    blib/lib/WWW/DanDomain.pm     100.0  100.0  100.0  100.0  100.0  100.0  100.0
+    Total                         100.0  100.0  100.0  100.0  100.0  100.0  100.0
+    ---------------------------- ------ ------ ------ ------ ------ ------ ------
 
 Please note the report is based on version 0.03 of WWW::DanDomain
 
@@ -531,7 +539,7 @@ an issue with release 0.03
 
 =head1 LICENSE AND COPYRIGHT
 
-Copyright 2009-2010 jonasbn, all rights reserved.
+Copyright 2009-2013 jonasbn, all rights reserved.
 
 This program is free software; you can redistribute it and/or modify it
 under the same terms as Perl itself.

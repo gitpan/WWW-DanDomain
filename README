@@ -42,6 +42,7 @@ SYNOPSIS
             cache    => 1,
         });
 
+
         #With custom WWW::Mechanize object
         use WWW::Mechanize;
 
@@ -53,6 +54,7 @@ SYNOPSIS
             url      => 'http://www.billigespil.dk/admin/edbpriser-export.asp',
             mech     => $mech,
         });
+    
     
         #The intended use
         package My::WWW::DanDomain::Subclass;
@@ -68,6 +70,7 @@ SYNOPSIS
             }
         }
     
+    
         #Using your new class
         my $my = My::WWW::DanDomain::Subclass->new({
             username => 'topshop',
@@ -79,6 +82,7 @@ SYNOPSIS
     
         print $$content;
 
+
         #Using a processor implemented as a code reference
         $wd = WWW::DanDomain->new({
             username  => 'topshop',
@@ -89,6 +93,7 @@ SYNOPSIS
                 return $_[0];
             },
         });    
+
 
         #Implementing a processor class
         my $processor = MY::Processor->new();
@@ -113,10 +118,12 @@ DESCRIPTION
 
     Such as:
 
-    * manipulating data exports (removing, adjusting, calculating, adding
-    columns)
-    * filling in missing data (combining data)
-    * converting formats (from CSV to XML, JSON, CSV, whatever)
+    *   manipulating data exports (removing, adjusting, calculating, adding
+        columns)
+
+    *   filling in missing data (combining data)
+
+    *   converting formats (from CSV to XML, JSON, CSV, whatever)
 
 METHODS
   new
@@ -125,81 +132,95 @@ METHODS
     The constructor takes a hash reference as input. The hash reference
     should contain keys according to the following conventions:
 
-    * username, optional username credential to access DanDomain
-    * password, optional password credential to access DanDomain
-    * url, the mandatory URL to retrieve data from (retrieve)
-    * mech, a WWW::Mechanize object if you have a pre instantiated object or
-    some other object implementing the the same API as WWW::Mechanize.
+    *   username, optional username credential to access DanDomain
+
+    *   password, optional password credential to access DanDomain
+
+    *   url, the mandatory URL to retrieve data from ("retrieve")
+
+    *   mech, a WWW::Mechanize object if you have a pre instantiated object
+        or some other object implementing the the same API as
+        WWW::Mechanize.
+
         The parameter is optional.
 
         See also cache parameter below for an example.
 
-    * verbose, a flag for indicating verbosity, default is 0 (disabled), the
-    parameter is optional
-    * cache, usage of a cache meaning that we internally use
-    WWW::Mechanize::Cached instead of WWW::Mechanize.
+    *   verbose, a flag for indicating verbosity, default is 0 (disabled),
+        the parameter is optional
+
+    *   cache, usage of a cache meaning that we internally use
+        WWW::Mechanize::Cached instead of WWW::Mechanize.
+
         The parameter is optional
 
-    * processor
+    *   processor
+
         This parameter can be used of you do not want to implement a
         subclass of WWW::DanDomain.
 
         The processor parameter can either be:
 
-        * an object implementing a proces method, with the following
-        profile:
+        *   an object implementing a "proces" method, with the following
+            profile:
+
                 proces(\$content);
 
-        * a code reference with the same profile, adhering to the following
-        example:
+        *   a code reference with the same profile, adhering to the
+            following example:
+
                 sub { return ${$_[0]} };
 
   retrieve
     Parameters:
 
-    * a hash reference, the reference can be populated with statistic
-    information based on the lineprocessing (processor) initiated from
-    retrieve.
+    *   a hash reference, the reference can be populated with statistic
+        information based on the lineprocessing ("processor") initiated from
+        "retrieve".
 
     The method returns a scalar reference to a string containing the content
-    retrieved from the URL provided to the contructor (new). If the
-    processor method is overwritten you can manipulate the content prior to
-    being returned.
+    retrieved from the URL provided to the contructor ("new"). If the
+    "processor" method is overwritten you can manipulate the content prior
+    to being returned.
 
   process
-    Takes the content retrieved (see: retrieve) from the URL parameter
-    provided to the constructor (see: new). You can overwrite the behaviour
-    via the constructor (see: new).
+    Takes the content retrieved (see: "retrieve") from the URL parameter
+    provided to the constructor (see: "new"). You can overwrite the
+    behaviour via the constructor (see: "new").
 
     Parameters:
 
-    * a scalar reference to a string to be processed line by line
+    *   a scalar reference to a string to be processed line by line
 
     The stub does however not do anything, but it returns the scalar
     reference *untouched*.
 
   processor
-    This is a wrapper for process, provided for backwards compatibility.
+    This is a wrapper for "process", provided for backwards compatibility.
 
 DIAGNOSTICS
-    * Unable to authenticate, username and password not valid credentials
-    * Both username and password is required for authentication
+    *   Unable to authenticate, username and password not valid credentials
+
+    *   Both username and password is required for authentication
+
         If you want to use authentication you have to provide both username
         and password.
 
-    * Unable to retrieve base URL: $@
+    *   Unable to retrieve base URL: $@
+
         The base URL provided to retrieve gives an error.
 
-        Please see: http://search.cpan.org/perldoc?HTTP%3A%3AResponse or
-        http://search.cpan.org/~gaas/libwww-perl/lib/HTTP/Status.pm
+        Please see: <http://search.cpan.org/perldoc?HTTP%3A%3AResponse> or
+        <http://search.cpan.org/~gaas/libwww-perl/lib/HTTP/Status.pm>
 
         Test the URL in your browser to investigate.
 
-    * Unable to retrieve URL: $@
+    *   Unable to retrieve URL: $@
+
         The base URL provided to retrieve gives an error.
 
-        Please see: http://search.cpan.org/perldoc?HTTP%3A%3AResponse or
-        http://search.cpan.org/~gaas/libwww-perl/lib/HTTP/Status.pm
+        Please see: <http://search.cpan.org/perldoc?HTTP%3A%3AResponse> or
+        <http://search.cpan.org/~gaas/libwww-perl/lib/HTTP/Status.pm>
 
         Test the URL in your browser to investigate.
 
@@ -208,8 +229,9 @@ CONFIGURATION AND ENVIRONMENT
     DanDomain with username and password is required.
 
 DEPENDENCIES
-    * WWW::Mechanize
-    * Carp
+    *   WWW::Mechanize
+
+    *   Carp
 
 TEST AND QUALITY
     The tests are based on Test::MockObject::Extends and example data are
@@ -227,13 +249,12 @@ TEST AND QUALITY
 
         % ./Build testcover --verbose
 
-    ---------------------------- ------ ------ ------ ------ ------ ------
-    ------ File stmt bran cond sub pod time total
-    ---------------------------- ------ ------ ------ ------ ------ ------
-    ------ blib/lib/WWW/DanDomain.pm 100.0 100.0 100.0 100.0 100.0 100.0
-    100.0 Total 100.0 100.0 100.0 100.0 100.0 100.0 100.0
-    ---------------------------- ------ ------ ------ ------ ------ ------
-    ------
+        ---------------------------- ------ ------ ------ ------ ------ ------ ------
+        File                           stmt   bran   cond    sub    pod   time  total
+        ---------------------------- ------ ------ ------ ------ ------ ------ ------
+        blib/lib/WWW/DanDomain.pm     100.0  100.0  100.0  100.0  100.0  100.0  100.0
+        Total                         100.0  100.0  100.0  100.0  100.0  100.0  100.0
+        ---------------------------- ------ ------ ------ ------ ------ ------ ------
 
     Please note the report is based on version 0.03 of WWW::DanDomain
 
@@ -255,21 +276,23 @@ BUGS AND LIMITATIONS
 BUG REPORTING
     Please report any bugs or feature requests via:
 
-    * email: `bug-www-dandomain at rt.cpan.org'
-    * HTTP: http://rt.cpan.org/NoAuth/ReportBug.html?Queue=WWW-DanDomain
+    *   email: "bug-www-dandomain at rt.cpan.org"
+
+    *   HTTP: <http://rt.cpan.org/NoAuth/ReportBug.html?Queue=WWW-DanDomain>
 
 DEVELOPMENT
-    * Subversion repository: http://logicLAB.jira.com/svn/DAND
+    *   Subversion repository: <http://logicLAB.jira.com/svn/DAND>
 
 TODO
-    * Most of the work is done in the classes inheriting from this class,
-    there could however be work to do in the maintenance area, making this
-    class more informative if failing
-    * I would like to add some integration test scripts so I can see that
-    the package works with real data apart from the mock.
+    *   Most of the work is done in the classes inheriting from this class,
+        there could however be work to do in the maintenance area, making
+        this class more informative if failing
+
+    *   I would like to add some integration test scripts so I can see that
+        the package works with real data apart from the mock.
 
 SEE ALSO
-    * http://www.dandomain.dk
+    *   <http://www.dandomain.dk>
 
 SUPPORT
     You can find documentation for this module with the perldoc command.
@@ -278,23 +301,28 @@ SUPPORT
 
     You can also look for information at:
 
-    * Official Wiki
-        http://logiclab.jira.com/wiki/display/DAND/Home+-+WWW-DanDomain
+    *   Official Wiki
 
-    * AnnoCPAN: Annotated CPAN documentation
-        http://annocpan.org/dist/WWW-DanDomain
+        <http://logiclab.jira.com/wiki/display/DAND/Home+-+WWW-DanDomain>
 
-    * CPAN Ratings
-        http://cpanratings.perl.org/d/WWW-DanDomain
+    *   AnnoCPAN: Annotated CPAN documentation
 
-    * RT: CPAN's request tracker
-        http://rt.cpan.org/NoAuth/Bugs.html?Dist=WWW-DanDomain
+        <http://annocpan.org/dist/WWW-DanDomain>
 
-    * Search CPAN
-        http://search.cpan.org/dist/WWW-DanDomain
+    *   CPAN Ratings
+
+        <http://cpanratings.perl.org/d/WWW-DanDomain>
+
+    *   RT: CPAN's request tracker
+
+        <http://rt.cpan.org/NoAuth/Bugs.html?Dist=WWW-DanDomain>
+
+    *   Search CPAN
+
+        <http://search.cpan.org/dist/WWW-DanDomain>
 
 AUTHOR
-    * jonasbn, `<jonasbn at cpan.org>'
+    *   jonasbn, "<jonasbn at cpan.org>"
 
 MOTIVATION
     This module grew out of a small script using WWW::Mechanize to fetch
@@ -311,16 +339,18 @@ MOTIVATION
     source.
 
 ACKNOWLEDGEMENTS
-    * Andy Lester (petdance) the author of WWW::Mechanize and
-    WWW::Mechanize:Cached, this module makes easy things easy and hard
-    things possible.
-    * Steen Schnack, who understand the power and flexibility of computer
-    programming and custom solutions and who gave me the assignment.
-    * Slaven Rezic, for his CPAN testers work and assistance in pointing out
-    an issue with release 0.03
+    *   Andy Lester (petdance) the author of WWW::Mechanize and
+        WWW::Mechanize:Cached, this module makes easy things easy and hard
+        things possible.
+
+    *   Steen Schnack, who understand the power and flexibility of computer
+        programming and custom solutions and who gave me the assignment.
+
+    *   Slaven Rezic, for his CPAN testers work and assistance in pointing
+        out an issue with release 0.03
 
 LICENSE AND COPYRIGHT
-    Copyright 2009-2010 jonasbn, all rights reserved.
+    Copyright 2009-2013 jonasbn, all rights reserved.
 
     This program is free software; you can redistribute it and/or modify it
     under the same terms as Perl itself.
