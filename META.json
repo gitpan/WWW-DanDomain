@@ -4,7 +4,7 @@
       "Jonas B. Nielsen, <jonasbn@logicLAB.dk>"
    ],
    "dynamic_config" : 1,
-   "generated_by" : "Module::Build version 0.4005, CPAN::Meta::Converter version 2.131560",
+   "generated_by" : "Module::Build version 0.4205",
    "license" : [
       "perl_5"
    ],
@@ -27,7 +27,7 @@
       },
       "configure" : {
          "requires" : {
-            "Module::Build" : "0.40"
+            "Module::Build" : "0.42"
          }
       },
       "runtime" : {
@@ -38,14 +38,15 @@
             "Try::Tiny" : "0",
             "UNIVERSAL::can" : "0",
             "WWW::Mechanize" : "0",
-            "WWW::Mechanize::Cached" : "0"
+            "WWW::Mechanize::Cached" : "0",
+            "perl" : "5.008"
          }
       }
    },
    "provides" : {
       "WWW::DanDomain" : {
          "file" : "lib/WWW/DanDomain.pm",
-         "version" : "0.06"
+         "version" : "0.07"
       }
    },
    "release_status" : "stable",
@@ -58,8 +59,11 @@
          "http://dev.perl.org/licenses/"
       ],
       "repository" : {
-         "url" : "http://logicLAB.jira.com/svn/DAND"
-      }
+         "url" : "https://github.com/jonasbn/dand"
+      },
+      "x_projectChangelog" : "http://logiclab.jira.com/browse/DAND#selectedTab=com.atlassian.jira.plugin.system.project%3Achangelog-panel",
+      "x_projectSite" : "http://logicLAB.jira.com/browse/DAND",
+      "x_projectWiki" : "http://logiclab.jira.com/wiki/display/DAND/Home"
    },
-   "version" : "0.06"
+   "version" : "0.07"
 }

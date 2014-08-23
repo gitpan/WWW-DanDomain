@@ -1,6 +1,6 @@
 #!/usr/bin/perl -w
 
-# $Id: new.t 7603 2011-04-17 20:51:35Z jonasbn $
+# $Id$
 
 use strict;
 use Test::More tests => 5;

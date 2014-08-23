@@ -1,7 +1,5 @@
 package WWW::DanDomain;
 
-# $Id: DanDomain.pm 8117 2013-07-25 13:39:29Z jonasbn $
-
 use warnings;
 use strict;
 use WWW::Mechanize;
@@ -9,8 +7,9 @@ use WWW::Mechanize::Cached;
 use Carp qw(croak);
 use Try::Tiny;
 use UNIVERSAL::can;
+use 5.008;
 
-our $VERSION = '0.06';
+our $VERSION = '0.07';
 
 sub new {
     my ( $class, $param ) = @_;
@@ -111,7 +110,7 @@ WWW::DanDomain - class to assist in interacting with DanDomain admin interface
 
 =head1 VERSION
 
-This documentation describes version 0.05
+This documentation describes version 0.07
 
 =head1 SYNOPSIS
 
@@ -539,7 +538,7 @@ an issue with release 0.03
 
 =head1 LICENSE AND COPYRIGHT
 
-Copyright 2009-2013 jonasbn, all rights reserved.
+Copyright 2009-2014 jonasbn, all rights reserved.
 
 This program is free software; you can redistribute it and/or modify it
 under the same terms as Perl itself.

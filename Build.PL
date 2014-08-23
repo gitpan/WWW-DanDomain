@@ -32,13 +32,18 @@ my $build = Module::Build->new(
         'Carp'                   => '0',
         'Try::Tiny'              => '0',
         'UNIVERSAL::can'         => '0',
+        'perl'                   => '5.008', 
     },
     meta_merge => {
         resources => {
             homepage => 'http://logicLAB.jira.com/browse/DAND',
             bugtracker =>
                 'http://rt.cpan.org/NoAuth/Bugs.html?Dist=WWW-DanDomain',
-            repository => 'http://logicLAB.jira.com/svn/DAND',
+            repository => 'https://github.com/jonasbn/dand',
+            ProjectChangelog =>
+                'http://logiclab.jira.com/browse/DAND#selectedTab=com.atlassian.jira.plugin.system.project%3Achangelog-panel',
+            ProjectSite => 'http://logicLAB.jira.com/browse/DAND',
+            ProjectWiki => 'http://logiclab.jira.com/wiki/display/DAND/Home',
         }
     },
 

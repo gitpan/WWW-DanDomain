@@ -1,6 +1,6 @@
 #!perl -T
 
-# $Id: 00-load.t 7603 2011-04-17 20:51:35Z jonasbn $
+# $Id$
 
 use Test::More tests => 1;
 

@@ -1,6 +1,6 @@
 # http://search.cpan.org/~bdfoy/Test-Prereq/lib/Build.pm
 
-# $Id: prerequisites.t 6328 2009-08-16 11:51:16Z jonasbn $
+# $Id$
 
 use strict;
 use warnings;

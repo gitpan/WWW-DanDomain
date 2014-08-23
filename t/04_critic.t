@@ -1,7 +1,7 @@
 # Courtesy of Jeffrey Ryan Thalhammer
 # http://search.cpan.org/~thaljef/Test-Perl-Critic/lib/Test/Perl/Critic.pm
 
-# $Id: 04_critic.t 2891 2009-04-16 19:31:53Z jonasbn $
+# $Id$
 
 use strict;
 use warnings;

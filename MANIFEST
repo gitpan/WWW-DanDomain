@@ -8,6 +8,7 @@ META.yml
 README
 t/00-load.t
 t/04_critic.t
+t/changes.t
 t/new.t
 t/perlcriticrc
 t/pod-coverage.t
